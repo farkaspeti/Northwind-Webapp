@@ -8,7 +8,9 @@
     <title>Task1 results:</title>
 </head>
 <body>
-
+<c:if test="${empty task1Results}">
+    <span> </span>
+</c:if>
 <c:if test="${not empty task1Results}">
     <table border="1">
         <tr>
@@ -23,12 +25,11 @@
         </c:forEach>
     </table>
 </c:if>
-
 <h2>Search by Company Name</h2>
 <form action="task1" method="post">
     <input type ="text" name="companyName" placeholder="Company Name">
         <c:forEach var="result" items="${task1FResults}">
-            <option value="<c:out value="${result.getCompanyName()}"/>">${result.getProductName()}</option>
+            <option value="<c:out value="${result.getCompanyName()}"/>">Product name: ${result.getProductName()}</option>
         </c:forEach>
     <input type="submit" value="Search">
 </form>

@@ -22,9 +22,16 @@ public class SimpleTask5Service implements Task5Service {
     }
     
     @Override
-    public Task5Model findByProductName(String productName) throws SQLException {
+    public List<Task5Model> findByProductName(String productName) throws SQLException {
         
         return task5Dao.findByProductName(productName);
+        
+    }
+    
+    @Override
+    public List<Task5Model> findByCompanyName(String companyName) throws SQLException {
+        
+        return task5Dao.findByCompanyName(companyName);
         
     }
     

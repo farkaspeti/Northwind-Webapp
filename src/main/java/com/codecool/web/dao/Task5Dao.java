@@ -9,8 +9,8 @@ public interface Task5Dao {
     
     List<Task5Model> getResult() throws SQLException;
     
-    Task5Model findByProductName(String productName) throws SQLException;
+    List<Task5Model> findByProductName(String productName) throws SQLException;
     
-    Task5Model findByCompanyName(String companyName) throws SQLException;
+    List<Task5Model> findByCompanyName(String companyName) throws SQLException;
     
 }

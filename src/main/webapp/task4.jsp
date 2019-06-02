@@ -22,7 +22,9 @@
     <title>Task4 results:</title>
 </head>
 <body>
-
+<c:if test="${empty task4Results}">
+    <span> </span>
+</c:if>
 <c:if test="${not empty task4Results}">
     <table border="1">
         <tr>
@@ -37,12 +39,11 @@
         </c:forEach>
     </table>
 </c:if>
-
 <h2>Search by Company Name</h2>
 <form action="task4" method="post">
-    <input type ="text" name="companyName" placeholder="Company Name">
+    <input type="text" name="companyName" placeholder="Company Name">
     <c:forEach var="result" items="${task4FResults}">
-        <option value="<c:out value="${result.getCompanyName()}"/>">${result.getOrderIDArray()}</option>
+        <option value="<c:out value="${result.getCompanyName()}"/>">${result.getCompanyName()}'s order IDs: ${result.getOrderIDArray()}</option>
     </c:forEach>
     <input type="submit" value="Search">
 </form>

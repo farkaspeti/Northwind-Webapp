@@ -10,5 +10,7 @@ public interface Task5Service {
     
     List<Task5Model> findAll() throws SQLException;
     
-    Task5Model findByProductName(String productName) throws SQLException;
+    List<Task5Model> findByProductName(String productName) throws SQLException;
+    
+    List<Task5Model> findByCompanyName(String companyName) throws SQLException;
 }

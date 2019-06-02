@@ -15,7 +15,9 @@
     <title>Task2 results:</title>
 </head>
 <body>
-
+<c:if test="${empty task2Results}">
+    <span> </span>
+</c:if>
 <c:if test="${not empty task2Results}">
     <table border="1">
         <tr>
@@ -35,7 +37,7 @@
 <form action="task2" method="post">
     <input type ="text" name="numberOfProducts" placeholder="Number of products">
     <c:forEach var="result" items="${task2FResults}">
-        <option value="<c:out value="${result.getNumberOfProducts()}"/>">${result.getCompanyName()}</option>
+        <option value="<c:out value="${result.getNumberOfProducts()}"/>">Company Name: ${result.getCompanyName()}</option>
     </c:forEach>
     <input type="submit" value="Search">
 </form>

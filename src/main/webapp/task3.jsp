@@ -12,12 +12,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task1 results:</title>
+    <title>Task3 results:</title>
 </head>
 <body>
-
 <c:if test="${empty task3Results}">
-    <span>No associated Data</span>
+    <span> </span>
 </c:if>
 <c:if test="${not empty task3Results}">
     <table border="1">
@@ -33,11 +32,10 @@
         </c:forEach>
     </table>
 </c:if>
-
 <h2>Search by Company Name</h2>
-<form action="task1" method="post">
-    <input type ="text" name="companyName" placeholder="Company Name">
-    <c:forEach var="result" items="${task1FResults}">
+<form action="task3" method="post">
+    <input type="text" name="companyName" placeholder="Company Name">
+    <c:forEach var="result" items="${task3FResults}">
         <option value="<c:out value="${result.getCompanyName()}"/>">${result.getNumberOfProducts()}</option>
     </c:forEach>
     <input type="submit" value="Search">

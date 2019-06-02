@@ -34,8 +34,9 @@ public class DatabaseTask5Dao extends AbstractDao implements Task5Dao {
     }
     
     @Override
-    public Task5Model findByProductName(String productName) throws SQLException {
-        
+    public List<Task5Model> findByProductName(String productName) throws SQLException {
+    
+        List<Task5Model> task5Query = new ArrayList<>();
         String sqlString = "SELECT suppliers.company_name, products.product_name, products.unit_price FROM products " +
             "JOIN suppliers ON suppliers.supplier_id = products.supplier_id " +
             "JOIN (SELECT products.supplier_id, max(products.unit_price) AS unit_price " +
@@ -47,17 +48,18 @@ public class DatabaseTask5Dao extends AbstractDao implements Task5Dao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
             preparedStatement.setString(1, productName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchQuery(resultSet);
+                while (resultSet.next()) {
+                    task5Query.add(fetchQuery(resultSet));
                 }
             }
         }
-        return null;
+        return task5Query;
     }
     
     @Override
-    public Task5Model findByCompanyName(String companyName) throws SQLException {
+    public List<Task5Model> findByCompanyName(String companyName) throws SQLException {
         
+        List<Task5Model> task5Query = new ArrayList<>();
         String sqlString = "SELECT suppliers.company_name, products.product_name, products.unit_price FROM products " +
             "JOIN suppliers ON suppliers.supplier_id = products.supplier_id " +
             "JOIN (SELECT products.supplier_id, max(products.unit_price) AS unit_price " +
@@ -69,18 +71,18 @@ public class DatabaseTask5Dao extends AbstractDao implements Task5Dao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
             preparedStatement.setString(1, companyName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchQuery(resultSet);
+                while (resultSet.next()) {
+                    task5Query.add(fetchQuery(resultSet));
                 }
             }
         }
-        return null;
+        return task5Query;
     }
     
     public Task5Model fetchQuery(ResultSet resultSet) throws SQLException {
-        String companyName = resultSet.getString("companyName");
-        String productName = resultSet.getString("productName");
-        double productPrice = resultSet.getDouble("productPrice");
+        String companyName = resultSet.getString("company_name");
+        String productName = resultSet.getString("product_name");
+        double productPrice = resultSet.getDouble("unit_price");
         return new Task5Model(companyName, productName, productPrice);
     }
 }
