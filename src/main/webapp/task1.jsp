@@ -9,9 +9,6 @@
 </head>
 <body>
 
-<c:if test="${empty task1Results}">
-    <span>No associated Data</span>
-</c:if>
 <c:if test="${not empty task1Results}">
     <table border="1">
         <tr>

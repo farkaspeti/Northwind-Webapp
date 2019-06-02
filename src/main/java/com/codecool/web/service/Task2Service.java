@@ -10,5 +10,5 @@ public interface Task2Service {
     
     List<Task2Model> findAll() throws SQLException;
     
-    Task2Model findByNumberOfProducts(String numberOfProducts) throws SQLException;
+    List<Task2Model> findByNumberOfProducts(String numberOfProducts) throws SQLException;
 }

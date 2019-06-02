@@ -9,6 +9,6 @@ public interface Task3Dao {
     
     List<Task3Model> getResult() throws SQLException;
     
-    Task3Model findByCompanyName(String companyName) throws SQLException;
+    List<Task3Model> findByCompanyName(String companyName) throws SQLException;
     
 }

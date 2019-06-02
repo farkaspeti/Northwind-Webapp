@@ -25,7 +25,8 @@ public class Task1Servlet extends AbstractServlet {
             
             req.setAttribute("task1Results",task1Results);
             req.getRequestDispatcher("task1.jsp").forward(req,resp);
-        } catch (SQLException ex){
+            
+        }   catch (SQLException ex){
             throw new ServletException(ex);
         }
     }

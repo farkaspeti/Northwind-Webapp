@@ -32,8 +32,9 @@ public class DatabaseTask2Dao extends AbstractDao implements Task2Dao {
     }
     
     @Override
-    public Task2Model findByNumberOfProducts(int numberOfProducts) throws SQLException {
+    public List<Task2Model> findByNumberOfProducts(int numberOfProducts) throws SQLException {
         
+        List<Task2Model> task2Query = new ArrayList<>();
         String sqlString = "SELECT company_name AS company, COUNT(product_name) AS numberofproducts FROM products " +
             "FULL JOIN suppliers " +
             "ON suppliers.supplier_id = products.supplier_id " +
@@ -43,18 +44,19 @@ public class DatabaseTask2Dao extends AbstractDao implements Task2Dao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
             preparedStatement.setInt(1, numberOfProducts);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchQuery(resultSet);
+                while (resultSet.next()) {
+                    task2Query.add(fetchQuery(resultSet));
                 }
+                return task2Query;
             }
         }
-        return null;
+        
     }
     
     
     private Task2Model fetchQuery(ResultSet resultSet) throws SQLException {
-        String companyName = resultSet.getString("companyName");
-        int numberOfProducts = resultSet.getInt("numberOfProducts");
+        String companyName = resultSet.getString("company");
+        int numberOfProducts = resultSet.getInt("numberofproducts");
         return new Task2Model(companyName, numberOfProducts);
     }
 }

@@ -9,6 +9,6 @@ public interface Task2Dao {
     
     List<Task2Model> getResult() throws SQLException;
     
-    Task2Model findByNumberOfProducts(int numberOfProducts) throws SQLException;
+    List<Task2Model> findByNumberOfProducts(int numberOfProducts) throws SQLException;
     
 }

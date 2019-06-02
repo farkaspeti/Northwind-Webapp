@@ -21,7 +21,7 @@ public class SimpleTask3Service implements Task3Service {
     }
     
     @Override
-    public Task3Model findByCompanyName(String companyName) throws SQLException {
+    public List<Task3Model> findByCompanyName(String companyName) throws SQLException {
         
         return task3Dao.findByCompanyName(companyName);
         

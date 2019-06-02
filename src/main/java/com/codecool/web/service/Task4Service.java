@@ -10,5 +10,5 @@ public interface Task4Service {
     
     List<Task4Model> findAll() throws SQLException;
     
-    Task4Model findByCompanyName(String companyName) throws SQLException;
+    List<Task4Model> findByCompanyName(String companyName) throws SQLException;
 }

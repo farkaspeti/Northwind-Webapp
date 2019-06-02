@@ -21,7 +21,7 @@ public class SimpleTask2Service implements Task2Service {
     }
     
     @Override
-    public Task2Model findByNumberOfProducts(String numberOfProducts) throws SQLException {
+    public List<Task2Model> findByNumberOfProducts(String numberOfProducts) throws SQLException {
         
         return task2Dao.findByNumberOfProducts(Integer.parseInt(numberOfProducts));
     }

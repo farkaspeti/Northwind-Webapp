@@ -33,9 +33,9 @@ public class DatabaseTask3Dao extends AbstractDao implements Task3Dao {
     }
     
     @Override
-    public Task3Model findByCompanyName(String companyName) throws SQLException {
-        
-        
+    public List<Task3Model> findByCompanyName(String companyName) throws SQLException {
+    
+        List<Task3Model> task3Query = new ArrayList<>();
         String sqlString = "SELECT company_name AS company,COUNT(DISTINCT product_name) AS numberofproducts FROM products " +
             "JOIN suppliers " +
             "ON suppliers.supplier_id = products.supplier_id " +
@@ -46,16 +46,17 @@ public class DatabaseTask3Dao extends AbstractDao implements Task3Dao {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
             preparedStatement.setString(1, companyName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return fetchQuery(resultSet);
+                while (resultSet.next()) {
+                    task3Query.add(fetchQuery(resultSet));
                 }
+                return task3Query;
             }
         }
-        return null;
     }
     
     private Task3Model fetchQuery(ResultSet resultSet) throws SQLException {
-        String companyName = resultSet.getString("companyName");
-        return new Task3Model(companyName);
+        String companyName = resultSet.getString("company");
+        int numberOfProducts = resultSet.getInt("numberofproducts");
+        return new Task3Model(companyName,numberOfProducts);
     }
 }

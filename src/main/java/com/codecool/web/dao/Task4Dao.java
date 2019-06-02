@@ -9,6 +9,6 @@ public interface Task4Dao {
     
     List<Task4Model> getResult() throws SQLException;
     
-    Task4Model findByCompanyName(String companyName) throws SQLException;
+    List<Task4Model> findByCompanyName(String companyName) throws SQLException;
     
 }

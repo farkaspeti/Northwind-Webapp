@@ -26,7 +26,8 @@ public class Task2Servlet extends AbstractServlet {
             
             req.setAttribute("task2Results",task2Results);
             req.getRequestDispatcher("task2.jsp").forward(req,resp);
-        }catch (SQLException ex){
+            
+        }   catch (SQLException ex){
             throw new ServletException(ex);
         }
     }
@@ -39,11 +40,11 @@ public class Task2Servlet extends AbstractServlet {
         try(Connection connection = getConnection(req.getServletContext())){
             Task2Dao task2Dao = new DatabaseTask2Dao(connection);
             SimpleTask2Service simpleTask2Service = new SimpleTask2Service(task2Dao);
-            Task2Model task2FResults = simpleTask2Service.findByNumberOfProducts(numberOfProducts);
-            
+            List<Task2Model> task2FResults = simpleTask2Service.findByNumberOfProducts(numberOfProducts);
             req.setAttribute("task2FResults",task2FResults);
             req.getRequestDispatcher("task2.jsp").forward(req,resp);
-        }catch (SQLException ex){
+            
+        }   catch (SQLException ex){
             throw new ServletException(ex);
         }
     }

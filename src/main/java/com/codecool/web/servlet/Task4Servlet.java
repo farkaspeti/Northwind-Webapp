@@ -40,7 +40,7 @@ public class Task4Servlet extends AbstractServlet {
         try(Connection connection = getConnection(req.getServletContext())){
             Task4Dao task4Dao = new DatabaseTask4Dao(connection);
             SimpleTask4Service simpleTask4Service = new SimpleTask4Service(task4Dao);
-            Task4Model task4FResults = simpleTask4Service.findByCompanyName(companyName);
+            List<Task4Model> task4FResults = simpleTask4Service.findByCompanyName(companyName);
             
             req.setAttribute("task4FResults",task4FResults);
             req.getRequestDispatcher("task4.jsp").forward(req,resp);

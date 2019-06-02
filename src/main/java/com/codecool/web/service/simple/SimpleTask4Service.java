@@ -22,7 +22,7 @@ public class SimpleTask4Service implements Task4Service {
     }
     
     @Override
-    public Task4Model findByCompanyName(String companyName) throws SQLException {
+    public List<Task4Model> findByCompanyName(String companyName) throws SQLException {
         
         return task4Dao.findByCompanyName(companyName);
     }
